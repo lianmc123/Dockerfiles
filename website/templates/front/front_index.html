@@ -29,14 +29,14 @@
                 {% for banner in banners %}
                     {% if loop.first %}
                         <div class="item active">
-                            <a href="{{ banner.link_url }}"><img src="{{ banner.image_url }}"
+                            <a target="_blank" href="{{ banner.link_url }}"><img src="{{ banner.image_url }}"
                                                                  alt="{{ banner.name }}"></a>
                             <div class="carousel-caption">
                             </div>
                         </div>
                     {% else %}
                         <div class="item">
-                            <a href="{{ banner.link_url }}"><img src="{{ banner.image_url }}"
+                            <a target="_blank" href="{{ banner.link_url }}"><img src="{{ banner.image_url }}"
                                                                  alt="{{ banner.name }}"></a>
                             <div class="carousel-caption">
                             </div>
