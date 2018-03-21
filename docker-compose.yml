@@ -1,0 +1,60 @@
+version: "3"
+
+services:
+  nginx:
+    image: nginx
+    container_name: nginx
+    ports:
+      - "80:80"
+    networks:
+      - front-nw
+      - back-nw
+    volumes: 
+      - ./nginx/website.conf:/etc/nginx/nginx.conf:ro
+      - ./website/static:/app/static
+    restart: always
+  website:
+    build: ./website/.
+    container_name: website
+    volumes: 
+      - ./website:/app
+    networks: 
+      - back-nw
+    restart: always
+  mysql: 
+    build: ./mysql/.
+    container_name: mysql
+    environment: 
+      MYSQL_ROOT_PASSWORD: lianmc123456
+      MYSQL_DATABASE: website
+    volumes: 
+      - db-data:/var/lib/mysql
+    networks: 
+      - back-nw
+    restart: always
+  redis: 
+    image: redis
+    container_name: redis
+    volumes: 
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - redis-data:/var/lib/redis
+    networks: 
+      - back-nw
+    restart: always
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    ports: 
+      - "8080:80"
+    networks:
+      - back-nw
+    links:
+      - mysql:db
+    restart: always
+volumes:
+  db-data:
+  redis-data:
+
+networks:
+  front-nw:
+  back-nw:

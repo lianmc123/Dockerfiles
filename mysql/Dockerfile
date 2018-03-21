@@ -1,0 +1,4 @@
+FROM mysql
+LABEL maintaner="lianmc9408@163.com"
+COPY mysqlutf8.cnf /etc/mysql/conf.d/mysqlutf8.cnf
+CMD ["mysqld", "--character-set-server=utf8", "--collation-server=utf8_unicode_ci"]

@@ -1,0 +1,27 @@
+{% extends "cms/cms_iframe_base.html" %}
+{% from "common/_macro.html" import static %}
+{% block css %}
+
+{% endblock %}
+
+{% block body %}
+
+    <h1 style="color: #1c2b36">这是修改邮箱页</h1>
+    <form action="" method="post">
+        <div class="form-group">
+            <div class="input-group" style="width: 300px">
+                <input type="email" class="form-control" placeholder="新邮箱" name="email">
+                <div class="input-group-addon" id="get-captcha" style="cursor: pointer">获取验证码</div>
+            </div>
+            <div class="input-group" style="margin-top: 20px; width: 300px">
+                <input type="text" class="form-control" style="border-radius: 4px" placeholder="请输入验证码" name="captcha">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" id="commit-btn">确认修改</button>
+    </form>
+
+{% endblock %}
+
+{% block js %}
+    <script src="{{ static("cms/js/resetemail.js") }}"></script>
+{% endblock %}
