@@ -68,11 +68,11 @@
                 {% else %}
                     <li><a href="{{ url_for('front.index', st=2, bd=current_board_id) }}">精华</a></li>
                 {% endif %}
-                {% if current_sort == 3 %}
-                    <li class="active"><a href="{{ url_for('front.index', st=3, bd=current_board_id) }}">点赞数排序</a></li>
-                {% else %}
-                    <li><a href="{{ url_for('front.index', st=3, bd=current_board_id) }}">点赞数排序</a></li>
-                {% endif %}
+                <!--{% if current_sort == 3 %}-->
+                    <!--<li class="active"><a href="{{ url_for('front.index', st=3, bd=current_board_id) }}">点赞数排序</a></li>-->
+                <!--{% else %}-->
+                    <!--<li><a href="{{ url_for('front.index', st=3, bd=current_board_id) }}">点赞数排序</a></li>-->
+                <!--{% endif %}-->
                 {% if current_sort == 4 %}
                     <li class="active"><a href="{{ url_for('front.index', st=4, bd=current_board_id) }}">评论数排序</a></li>
                 {% else %}
