@@ -33,7 +33,7 @@
         {% for board in boards %}
             <tr data-id="{{ board.id }}" data-name="{{ board.name }}">
                 <td>{{ board.name }}</td>
-                <td>0</td>
+                <td>{{ board.post|length}}</td>
                 <td>{{ board.create_time }}</td>
                 {% if board.is_show is eq(1) %}
                     <td>
