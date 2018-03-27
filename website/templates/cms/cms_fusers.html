@@ -6,6 +6,41 @@
 {% block body %}
 
     <h1 style="color: #1c2b36">这是前台用户管理页</h1>
+    <table class="table table-bordered text-center ">
+        <thead>
+        <colgroup>
+            <col></col>
+            <col width='80px'></col>
+            <col></col>
+            <col></col>
+            <col width='80px'></col>
+            <col width='200px'></col>
+          </colgroup>
+        <tr>
+            <th class="text-center">ID</th>
+            <th class="text-center">UID</th>
+            <th class="text-center">用户名</th>
+            <th class="text-center">手机</th>
+            <th class="text-center">邮箱</th>
+            <th class="text-center">注册时间</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.uid }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.telephone }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.join_time }}</td>
+            </tr>
+        {% endfor %}
+
+
+        </tbody>
+    </table>
 {% endblock %}
 
 {% block js %}

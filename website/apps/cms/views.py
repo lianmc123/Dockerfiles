@@ -3,6 +3,7 @@ from .forms import LoginForm, ResetPwdForm, ResetEmailForm, AddBannerForm, Updat
     UpdateBoardForm
 from .models import CMSUser, CMSPermission
 from apps.common.models import BannerModel, BoardModel, PostModel, HighlightPostModel
+from apps.front.models import FrontUser
 from .decorators import login_required, permission_required
 import config
 from exts import db, mail
@@ -216,7 +217,8 @@ def dboard():
 @login_required
 @permission_required(CMSPermission.FRONTUSER)
 def fusers():
-    return render_template('cms/cms_fusers.html')
+    users = FrontUser.query.all()
+    return render_template('cms/cms_fusers.html', users=users)
 
 
 @bp.route('/cusers/')
