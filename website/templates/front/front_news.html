@@ -1,0 +1,122 @@
+{% extends "front/front_base.html" %}
+{% from "common/_macro.html" import static %}
+{% block title %}
+    新闻
+{% endblock %}
+
+{% block css %}
+    <meta name="referrer" content="never">
+    <style>
+        .cover-img-group img {
+            width: 171px;
+            height: 144px;
+        }
+
+        .cover-img-group {
+            float: left;
+        }
+
+        .new-list-group {
+            margin-top: 20px;
+
+        }
+
+        .new-list-group li {
+            overflow: hidden;
+            padding-bottom: 10px;
+        }
+
+        .post-title a {
+            font-size: 20px;
+        }
+
+        .new-info {
+            margin-top: 88px;
+            font-size: 12px;
+            color: #8c8c8c;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="post-group">
+        <ul class="post-group-head">
+            {% if current_channel_id == 1 %}
+                <li class="active"><a href="{{ url_for('front.news', ch=1) }}">最新</a></li>
+            {% else %}
+                <li><a href="{{ url_for('front.news', ch=1) }}">最新</a></li>
+            {% endif %}
+            {% if current_channel_id == 2 %}
+                <li class="active"><a href="{{ url_for('front.news', ch=2) }}">娱乐</a></li>
+            {% else %}
+                <li><a href="{{ url_for('front.news', ch=2) }}">娱乐</a></li>
+            {% endif %}
+            {% if current_channel_id == 3 %}
+                <li class="active"><a href="{{ url_for('front.news', ch=3) }}">财经</a></li>
+            {% else %}
+                <li><a href="{{ url_for('front.news', ch=3) }}">财经</a></li>
+            {% endif %}
+            {% if current_channel_id == 4 %}
+                <li class="active"><a href="{{ url_for('front.news', ch=4) }}">运动</a></li>
+            {% else %}
+                <li><a href="{{ url_for('front.news', ch=4) }}">运动</a></li>
+            {% endif %}
+            {% if current_channel_id == 5 %}
+                <li class="active"><a href="{{ url_for('front.news', ch=5) }}">科技</a></li>
+            {% else %}
+                <li><a href="{{ url_for('front.news', ch=5) }}">科技</a></li>
+            {% endif %}
+            {% if current_channel_id == 6 %}
+                <li class="active"><a href="{{ url_for('front.news', ch=6) }}">汽车</a></li>
+            {% else %}
+                <li><a href="{{ url_for('front.news', ch=6) }}">汽车</a></li>
+            {% endif %}
+{#            {% if current_channel_id == 7 %}#}
+{#                <li class="active"><a href="{{ url_for('front.news', ch=7) }}">房产</a></li>#}
+{#            {% else %}#}
+{#                <li><a href="{{ url_for('front.news', ch=7) }}">房产</a></li>#}
+{#            {% endif %}#}
+            {% if current_channel_id == 8 %}
+                <li class="active"><a href="{{ url_for('front.news', ch=8) }}">时尚</a></li>
+            {% else %}
+                <li><a href="{{ url_for('front.news', ch=8) }}">时尚</a></li>
+            {% endif %}
+            {% if current_channel_id == 9 %}
+                <li class="active"><a href="{{ url_for('front.news', ch=9) }}">文化</a></li>
+            {% else %}
+                <li><a href="{{ url_for('front.news', ch=9) }}">文化</a></li>
+            {% endif %}
+        </ul>
+        <ul class="new-list-group">
+            {% for newss in news %}
+                <li>
+                    <div class="cover-img-group">
+                        <img src="{{ newss.cover_img or url_for('static', filename="common/images/avatar.jpeg") }}"
+                             alt="">
+                    </div>
+                    <div class="post-info-group">
+                        <p class="post-title"><a
+                                href="{{ url_for("front.news_detail",a_id=newss.a_id) }}" target="_blank">{{ newss.title }}</a>
+                        </p>
+                        <p class="new-info">
+                            <span>发布时间:{{ newss.pubtime | handle_time }}</span>
+                        </p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <div style="text-align: center">
+            {{ pagination.links }}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(function () {
+            $('#menu-index').removeClass('menu__item--current');
+            $('#menu-index1').addClass('menu__item--current');
+        })
+    </script>
+{% endblock %}

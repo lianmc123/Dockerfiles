@@ -43,6 +43,10 @@ def xxxx(value):
         return ''
 
 
+@app.template_filter('handle_n')
+def xxx(value):
+    return value.replace('\n', '<br>')
+
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('front/front_404.html'), 404

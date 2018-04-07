@@ -1,5 +1,6 @@
 from exts import db
 from datetime import datetime
+from sqlalchemy.dialects.mysql import LONGTEXT
 
 
 class BannerModel(db.Model):
@@ -58,3 +59,20 @@ class CommentModel(db.Model):
 
     post = db.relationship("PostModel", backref='comments')
     author = db.relationship("FrontUser", backref='comments')
+
+
+class News(db.Model):
+    __tablename__ = 'news'
+    a_id = db.Column(db.String(32), primary_key=True)
+    title = db.Column(db.String(50), nullable=False)
+    cover_img = db.Column(db.Text)
+    content = db.Column(LONGTEXT, nullable=False)
+    channel = db.Column(db.String(10), nullable=False)
+    pubtime = db.Column(db.DATETIME, default=datetime(2018, 1, 1, 0, 0, 0))
+    url = db.Column(db.String(255))
+    crawl_time = db.Column(db.DATETIME, default=datetime.now)
+    update_time = db.Column(db.DATETIME, default=datetime.now)
+
+    __mapper_args__ = {
+        "order_by": pubtime.desc()
+    }
