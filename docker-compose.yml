@@ -40,8 +40,8 @@ services:
       - ./website:/app
       - ./biscrapy:/biscrapy
     depends_on:
-      - "redis"
-      - "mysql"
+      - redis
+      - mysql
     networks: 
       - back-nw
     restart: always
