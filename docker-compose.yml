@@ -19,9 +19,6 @@ services:
     volumes: 
       - ./website:/app
       - ./biscrapy:/biscrapy
-    depends_on: 
-      - "redis"
-      - "mysql"
     networks: 
       - back-nw
     restart: always

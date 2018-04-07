@@ -6,3 +6,7 @@ subprocess.call(["uwsgi", "--ini", "w_uwsgi.ini"])
 
 # RUN celery -A tasks.celery worker -l info
 # CMD ["uwsgi", "--ini", "w_uwsgi.ini"]
+
+# depends_on:
+# - "redis"
+# - "mysql"
