@@ -35,7 +35,7 @@ def xxxx(value):
             return '%d分钟前' % (now_value // 60)
         elif now_value < 86400:
             return '%d小时前' % (now_value // 3600)
-        elif now_value < 60 * 60 * 24 * 365:
+        elif now_value < 60 * 60 * 24 * 7:
             return '%d天前' % int(now_value / (3600 * 24))
         else:
             return value.strftime('%Y-%m-%d')

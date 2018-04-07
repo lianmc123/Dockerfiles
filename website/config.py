@@ -2,7 +2,7 @@ import os
 from datetime import timedelta
 
 # ------------ app.run()相关参数---------------
-DEBUG = True
+DEBUG = False
 # ----------------- 分割线 --------------------
 
 # ------------- SQLAlchemy 相关----------------
@@ -43,7 +43,6 @@ MAIL_DEBUG = False
 # ----------------- 阿里大于 -----------------------
 ALIDAYU_APP_KEY = 'LTAIfbaYxJm4sWQZ'
 ALIDAYU_APP_SECRET = 'K8q1CPvkFNYeRuMqIMtlQUfBDWBJNv'
-# ALIDAYU_APP_SECRET = 'K8q1CPvkFNYeRuMqIMtlQUfBDWBJNn'
 ALIDAYU_SIGN_NAME = '易秀米'
 ALIDAYU_TEMPLATE_CODE = 'SMS_126635198'
 # ----------------- 分割线 ---------------------
