@@ -1,13 +1,14 @@
 from flask import Blueprint, views, render_template, request, session, url_for, g, abort, redirect
 from .forms import SignupForm, SigninForm, AddPostForm, AddCommentForm
 from .models import FrontUser
-from apps.common.models import BannerModel, BoardModel, PostModel, CommentModel, HighlightPostModel
+from apps.common.models import BannerModel, BoardModel, PostModel, CommentModel, HighlightPostModel, News
 from exts import db
 from utils import restful, safeurl
 import config
 from .decorators import login_required
 from flask_paginate import Pagination, get_page_parameter
 from sqlalchemy import func
+import json
 
 bp = Blueprint('front', __name__)
 
@@ -122,6 +123,54 @@ def add_post():
 def logout():
     session.pop(config.FRONT_USER_ID)
     return redirect(url_for('front.index'))
+
+
+@bp.route('/news/')
+def news():
+    channel = request.args.get('ch', type=int, default=1)
+    # current_channel_id = request.args.get('cci', type=int, default=1)
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    start = (page - 1) * config.PER_PAGE
+    end = start + config.PER_PAGE
+    query = None
+    if channel == 1:
+        query = News.query
+    elif channel == 2:
+        query = News.query.filter_by(channel='娱乐')
+    elif channel == 3:
+        query = News.query.filter_by(channel='财经')
+    elif channel == 4:
+        query = News.query.filter_by(channel='运动')
+    elif channel == 5:
+        query = News.query.filter_by(channel='科技')
+    elif channel == 6:
+        query = News.query.filter_by(channel='汽车')
+    # elif channel == 7:
+    #     query = News.query.filter_by(channel='房产')
+    elif channel == 8:
+        query = News.query.filter_by(channel='时尚')
+    elif channel == 9:
+        query = News.query.filter_by(channel='文化')
+    else:
+        abort(404)
+    news = query.slice(start, end)
+    total = query.count()
+    pagination = Pagination(bs_version=3, page=page, total=total, outer_window=0)
+    context = {
+        'news': news,
+        'pagination': pagination,
+        'current_channel_id': channel
+    }
+    return render_template('front/front_news.html', **context)
+
+
+@bp.route('/n/<a_id>/')
+def news_detail(a_id):
+    newss = News.query.get(a_id)
+    content = json.loads(newss.content, encoding='utf-8')
+    if not newss:
+        abort(404)
+    return render_template("front/front_ndetail.html", newss=newss, content=content)
 
 
 class SignUpView(views.MethodView):
