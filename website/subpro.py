@@ -1,7 +1,7 @@
 import subprocess
 
-subprocess.call('celery -A tasks.celery worker -l info', shell=True)
-subprocess.call('uwsgi --ini w_uwsgi.ini', shell=True)
+subprocess.Popen(["celery", "-A", "tasks.celery", "worker", "-l", "info"])
+subprocess.Popen(["uwsgi", "--ini", "w_uwsgi.ini"])
 
-#RUN celery -A tasks.celery worker -l info
+# RUN celery -A tasks.celery worker -l info
 # CMD ["uwsgi", "--ini", "w_uwsgi.ini"]
