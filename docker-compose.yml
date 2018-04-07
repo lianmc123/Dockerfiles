@@ -13,6 +13,18 @@ services:
       - ./nginx/website.conf:/etc/nginx/nginx.conf:ro
       - ./website/static:/app/static
     restart: always
+  website:
+    build: ./website/.
+    container_name: website
+    volumes: 
+      - ./website:/app
+      - ./biscrapy:/biscrapy
+    depends_on: 
+      - "redis"
+      - "mysql"
+    networks: 
+      - back-nw
+    restart: always
   mysql: 
     build: ./mysql/.
     container_name: mysql
@@ -30,18 +42,6 @@ services:
     volumes: 
       - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
       - redis-data:/var/lib/redis
-    networks: 
-      - back-nw
-    restart: always
-  website:
-    build: ./website/.
-    container_name: website
-    volumes: 
-      - ./website:/app
-      - ./biscrapy:/biscrapy
-    depends_on:
-      - redis
-      - mysql
     networks: 
       - back-nw
     restart: always
