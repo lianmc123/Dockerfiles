@@ -50,6 +50,7 @@ class MySQLTwisterPipeline(object):
         insert_sql = '''
             insert into news(a_id, title, cover_img, content, channel, pubtime, url, crawl_time, update_time)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+            on duplicate key UPDATE update_time=VALUES (update_time)
         '''
         cursor.execute(insert_sql, (
             item['a_id'], item['title'], item['cover_img'], json.dumps(item['content']), item['channel'],
