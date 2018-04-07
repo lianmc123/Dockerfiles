@@ -18,6 +18,7 @@ services:
     container_name: website
     volumes: 
       - ./website:/app
+      - ./biscrapy:/biscrapy
     networks: 
       - back-nw
     restart: always
